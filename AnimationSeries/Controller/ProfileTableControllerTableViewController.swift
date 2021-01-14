@@ -20,7 +20,7 @@ class ProfileTableController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 20
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,9 +33,9 @@ class ProfileTableController: UITableViewController {
 class ProfileCell: UITableViewCell {
     static let defaultHeight: CGFloat = 85
     
-    var profileImage: CircleView = {
+    lazy var profileImage: CircleView = {
         let view = CircleView()
-        view.backgroundColor = UIColor.systemRed
+        view.backgroundColor = UIColor.randomSystemColor
         return view
     }()
     
@@ -56,7 +56,7 @@ class ProfileCell: UITableViewCell {
         
         profileImage.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        profileImage.heightAnchor.constraint(equalTo: profileImage.heightAnchor).isActive = true
+        profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor).isActive = true
         profileImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
