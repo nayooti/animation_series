@@ -32,11 +32,19 @@ class ProfileTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       // let profileCell = tableView.cellForRow(at: indexPath) as! ProfileCell
+       let profileCell = tableView.cellForRow(at: indexPath) as! ProfileCell
+        let cellRect = tableView.rectForRow(at: indexPath)
+        let cellRectInView = tableView.convert(cellRect, to: view)
         
         let profileDetailController = ProfileDetailViewController()
         profileDetailController.transitioningDelegate = self
-        
+        let originFrame = profileCell.contentView.frame
+        let convertedFrame = profileCell.convert(profileCell.frame, to: tableView) //tableView.convert(originFrame, to: tableView.superview!)
+        print(originFrame)
+        print(convertedFrame)
+        transitionAnimator.presenting = true
+    
+        transitionAnimator.originFrame = cellRectInView //CGRect(x: 30, y: 300, width: view.frame.width, height: ProfileCell.defaultHeight)
         self.present(profileDetailController, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: false)
@@ -121,7 +129,7 @@ class ProfileCell: UITableViewCell {
 
 class ProfileOpenAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    let duration = 1.0
+    let duration = 3.0
     var presenting = true
     var originFrame = CGRect.zero
     
@@ -134,13 +142,48 @@ class ProfileOpenAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let containerView = transitionContext.containerView
         let toView = transitionContext.view(forKey: .to)!
         
+        let profileView = presenting ? toView : transitionContext.view(forKey: .from)!
+        
+        let initialFrame = presenting ? originFrame : profileView.frame
+        let finalFrame = presenting ? profileView.frame : originFrame
+        
+        let xScaleFactor = presenting ? initialFrame.width / finalFrame.width :
+            finalFrame.width / initialFrame.width
+        
+        let yScaleFactor = presenting ? initialFrame.height / finalFrame.height :
+            finalFrame.height / initialFrame.height
+        
+        
+        let scaleTransform = CGAffineTransform(scaleX: xScaleFactor, y: yScaleFactor)
+        if presenting {
+            profileView.transform = scaleTransform
+            profileView.center = CGPoint(x: initialFrame.midX, y: initialFrame.midY)
+            profileView.clipsToBounds = true
+        }
+        
         containerView.addSubview(toView)
-        toView.alpha = 0
-        UIView.animate(withDuration: duration, animations: {
-            toView.alpha = 1.0
-        }, completion: { _ in
-            transitionContext.completeTransition(true)
-        })
+        containerView.bringSubviewToFront(profileView)
+        
+        UIView.animate(
+            withDuration: duration,
+            delay: 0,
+            usingSpringWithDamping: 0.4,
+            initialSpringVelocity: 0.0,
+            animations: {
+                profileView.transform = self.presenting ?
+                    CGAffineTransform.identity : scaleTransform
+                profileView.center = CGPoint(x: finalFrame.midX, y: finalFrame.midY)
+            }, completion: {_ in
+                transitionContext.completeTransition(true)
+            })
+        
+//        containerView.addSubview(toView)
+//        toView.alpha = 0
+//        UIView.animate(withDuration: duration, animations: {
+//            toView.alpha = 1.0
+//        }, completion: { _ in
+//            transitionContext.completeTransition(true)
+//        })
     }
 }
 
