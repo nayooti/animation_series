@@ -1,6 +1,8 @@
 import UIKit
 
 class ProfileTableController: UITableViewController {
+    
+    let transitionAnimator = ProfileOpenAnimator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,25 @@ class ProfileTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+       // let profileCell = tableView.cellForRow(at: indexPath) as! ProfileCell
+        
+        let profileDetailController = ProfileDetailViewController()
+        profileDetailController.transitioningDelegate = self
+        
+        self.present(profileDetailController, animated: true, completion: nil)
+        
         tableView.deselectRow(at: indexPath, animated: false)
+    }
+}
+
+extension ProfileTableController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return transitionAnimator
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return nil
     }
 }
 
@@ -97,11 +117,39 @@ class ProfileCell: UITableViewCell {
         detailBar.bottomAnchor.constraint(equalTo: profileImage.bottomAnchor).isActive = true
         
     }
-    
-    
 }
 
+class ProfileOpenAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    
+    let duration = 1.0
+    var presenting = true
+    var originFrame = CGRect.zero
+    
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return duration
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let containerView = transitionContext.containerView
+        let toView = transitionContext.view(forKey: .to)!
+        
+        containerView.addSubview(toView)
+        toView.alpha = 0
+        UIView.animate(withDuration: duration, animations: {
+            toView.alpha = 1.0
+        }, completion: { _ in
+            transitionContext.completeTransition(true)
+        })
+    }
+}
 
+class ProfileDetailViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        view.backgroundColor = .green
+    }
+}
 
 
 

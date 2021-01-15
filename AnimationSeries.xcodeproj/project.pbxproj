@@ -16,7 +16,7 @@
 		AE373C6F25B0DEC7005B1368 /* AnimationSeriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE373C6E25B0DEC7005B1368 /* AnimationSeriesUITests.swift */; };
 		AE373C8C25B0E5AE005B1368 /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE373C8B25B0E5AE005B1368 /* Definitions.swift */; };
 		AE373C9125B0E645005B1368 /* AnimationTableCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE373C9025B0E645005B1368 /* AnimationTableCoordinator.swift */; };
-		AE373C9A25B0EADE005B1368 /* ProfileTableControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE373C9925B0EADE005B1368 /* ProfileTableControllerTableViewController.swift */; };
+		AE373C9A25B0EADE005B1368 /* ProfileTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE373C9925B0EADE005B1368 /* ProfileTableController.swift */; };
 		AE373CA225B0EC63005B1368 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE373CA125B0EC63005B1368 /* CircleView.swift */; };
 		AE814F2325B0F50900EAB43A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE814F2225B0F50900EAB43A /* UIColor+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -54,7 +54,7 @@
 		AE373C7025B0DEC7005B1368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE373C8B25B0E5AE005B1368 /* Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Definitions.swift; path = "../New Group/Definitions.swift"; sourceTree = "<group>"; };
 		AE373C9025B0E645005B1368 /* AnimationTableCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTableCoordinator.swift; sourceTree = "<group>"; };
-		AE373C9925B0EADE005B1368 /* ProfileTableControllerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableControllerTableViewController.swift; sourceTree = "<group>"; };
+		AE373C9925B0EADE005B1368 /* ProfileTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableController.swift; sourceTree = "<group>"; };
 		AE373CA125B0EC63005B1368 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		AE814F2225B0F50900EAB43A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				AE373C5025B0DEC4005B1368 /* AnimationTableController.swift */,
-				AE373C9925B0EADE005B1368 /* ProfileTableControllerTableViewController.swift */,
+				AE373C9925B0EADE005B1368 /* ProfileTableController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -306,7 +306,7 @@
 				AE373C5125B0DEC4005B1368 /* AnimationTableController.swift in Sources */,
 				AE373C9125B0E645005B1368 /* AnimationTableCoordinator.swift in Sources */,
 				AE373C4D25B0DEC4005B1368 /* AppDelegate.swift in Sources */,
-				AE373C9A25B0EADE005B1368 /* ProfileTableControllerTableViewController.swift in Sources */,
+				AE373C9A25B0EADE005B1368 /* ProfileTableController.swift in Sources */,
 				AE373C4F25B0DEC4005B1368 /* SceneDelegate.swift in Sources */,
 				AE814F2325B0F50900EAB43A /* UIColor+Extensions.swift in Sources */,
 			);
